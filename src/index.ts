@@ -1,16 +1,16 @@
 import { chooseOf, chooseWithout } from './helpers'
 
-interface WalkerOptions {
+export interface WalkerOptions {
   gridSize: number;
 }
 
-interface Position {
+export interface Position {
   begin: number;
   end: number;
 }
 
-type Walk = (previous: Position) => Position
-type WalkFactory = (opts: WalkerOptions) => Walk
+export type Walk = (previous: Position) => Position
+export type WalkFactory = (opts: WalkerOptions) => Walk
 
 const makeWalk: WalkFactory = ({ gridSize }) => {
   return (previous) => {
