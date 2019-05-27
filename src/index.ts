@@ -2,6 +2,7 @@ import { choose, chooseOf, chooseWithout } from './utils'
 
 interface WalkerOptions {
   gridSize: number;
+  maxBlockSize?: number;
 }
 
 export interface Position {
@@ -15,38 +16,41 @@ type MakePosition = () => Position
 
 class Walker {
   public lines: number
+  public maxBlockSize: number
   public constructor (opts: WalkerOptions) {
-    this.lines = Math.max(opts.gridSize, 3) + 1
-  }
-
-  public makePosition: MakePosition = () => {
-    const { lines } = this
-    const begin = choose(lines)
-    const end = chooseWithout(lines, {
-      exceptions: [ begin ]
-    })
-    return { begin, end }
+    const gridSize = Math.max(opts.gridSize, 3)
+    this.lines = gridSize + 1
+    this.maxBlockSize = opts.maxBlockSize
+      ? Math.max(1, Math.min(gridSize, opts.maxBlockSize))
+      : gridSize
   }
   
   public walkOnce: WalkOnce = previous => {
-    const { lines } = this
-    const random = chooseOf(previous)
+    const { lines, maxBlockSize } = this
+    const prev = previous || {
+      begin: 0,
+      end: choose(maxBlockSize + 1),
+    }
+    const random = chooseOf(prev)
     const randomValue = chooseWithout(lines, {
-      exceptions: Object.values(previous)
+      exceptions: Object.values(prev)
     })
 
-    return {
-      ...previous,
+    const next = {
+      ...prev,
       [random]: randomValue
     }
+
+    return (Math.abs(next.begin - next.end) > maxBlockSize)
+      ? this.walkOnce(prev)
+      : next
   }
 
   public walk: Walk = amount => {
-    const { walkOnce, makePosition } = this
-    const initialValue = [makePosition()]
-    return Array(amount - 1)
+    const { walkOnce } = this
+    return Array(amount)
       .fill(0)
-      .reduce(acc => [walkOnce(acc[0]), ...acc], initialValue)
+      .reduce(acc => [walkOnce(acc[0]), ...acc], [])
   }
 }
 

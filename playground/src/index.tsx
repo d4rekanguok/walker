@@ -34,22 +34,39 @@ const Cell = styled.div.attrs(({ row, begin, end }: CellProps) => ({
 const App = () => {
   const [ gridSize, setGridSize ] = useState(4)
   const [ positions, setPositions ] = useState<Position[]>([])
+  const [ maxBlockSize, setMaxBlockSize ] = useState(3)
   const [ key, setKey ] = useState(0)
   useEffect(() => {
-    const walker = new Walker({ gridSize })
+    const walker = new Walker({
+      gridSize,
+      maxBlockSize,
+    })
     setPositions(walker.walk(10))
-  }, [gridSize, key])
+  }, [gridSize, key, maxBlockSize])
 
   return (
     <>
-    <input 
-      type="number" 
-      onChange={e => setGridSize(+e.target.value)} 
-      value={gridSize}
-      min={3}
-    />
-    <button onClick={() => setKey(key + 1)} >Reload</button>
-    <GridContainer gridSize={gridSize} key={`${gridSize}-${key}`}>
+    <div>
+      <label htmlFor="gridSize">Grid Size</label>
+      <input
+        id="gridSize"
+        type="number" 
+        onChange={e => setGridSize(+e.target.value)} 
+        value={gridSize}
+        min={3}
+      />
+      <label htmlFor="maxBlockSize">max Block Size</label>
+      <input
+        id="maxBlockSize"
+        type="number" 
+        onChange={e => setMaxBlockSize(+e.target.value)} 
+        value={maxBlockSize}
+        min={1}
+        max={gridSize}
+      />
+      <button onClick={() => setKey(key + 1)} >Reload</button>
+    </div>
+    <GridContainer gridSize={gridSize} key={`${gridSize}-${maxBlockSize}-${key}`}>
       { positions.map((pos, i) => <Cell key={i} row={i} {...pos}>{i}</Cell>) }
     </GridContainer>
     </>
