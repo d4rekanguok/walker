@@ -4,7 +4,7 @@ interface WalkerOptions {
   gridSize: number;
 }
 
-interface Position {
+export interface Position {
   begin: number;
   end: number;
 }
@@ -14,14 +14,24 @@ type Walk = (amount: number) => Position[]
 type MakePosition = () => Position
 
 class Walker {
-  public gridSize: number
+  public lines: number
   public constructor (opts: WalkerOptions) {
-    this.gridSize = opts.gridSize || 4
+    this.lines = opts.gridSize + 1 || 5
   }
+
+  public makePosition: MakePosition = () => {
+    const { lines } = this
+    const begin = choose(lines)
+    const end = chooseWithout(lines, {
+      exceptions: [ begin ]
+    })
+    return { begin, end }
+  }
+  
   public walkOnce: WalkOnce = previous => {
-    const { gridSize } = this
+    const { lines } = this
     const random = chooseOf(previous)
-    const randomValue = chooseWithout(gridSize, {
+    const randomValue = chooseWithout(lines, {
       exceptions: Object.values(previous)
     })
 
@@ -29,15 +39,6 @@ class Walker {
       ...previous,
       [random]: randomValue
     }
-  }
-  
-  public makePosition: MakePosition = () => {
-    const { gridSize } = this
-    const begin = choose(gridSize)
-    const end = chooseWithout(gridSize, {
-      exceptions: [ begin ]
-    })
-    return { begin, end }
   }
 
   public walk: Walk = amount => {
