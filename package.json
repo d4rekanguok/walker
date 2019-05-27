@@ -19,6 +19,7 @@
   "homepage": "https://github.com/d4rekanguok/walker#readme",
   "devDependencies": {
     "@types/jest": "^24.0.13",
+    "@types/node": "^11.13.11",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "eslint": "^5.16.0",
@@ -27,8 +28,5 @@
     "jest-mock-random": "^1.0.2",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.5"
-  },
-  "dependencies": {
-    "@types/node": "^11.13.11"
   }
 }
