@@ -36,13 +36,14 @@ const App = () => {
   const [ positions, setPositions ] = useState<Position[]>([])
   const [ maxBlockSize, setMaxBlockSize ] = useState(3)
   const [ key, setKey ] = useState(0)
+  const [ amount, setAmount ] = useState(10) 
   useEffect(() => {
     const walker = new Walker({
       gridSize,
       maxBlockSize,
     })
-    setPositions(walker.walk(10))
-  }, [gridSize, key, maxBlockSize])
+    setPositions(walker.walk(amount))
+  }, [gridSize, key, maxBlockSize, amount])
 
   return (
     <>
@@ -63,6 +64,14 @@ const App = () => {
         value={maxBlockSize}
         min={1}
         max={gridSize}
+      />
+      <label htmlFor="amount">Block Amount</label>
+      <input
+        id="amount"
+        type="number" 
+        onChange={e => setAmount(+e.target.value)} 
+        value={amount}
+        min={5}
       />
       <button onClick={() => setKey(key + 1)} >Reload</button>
     </div>
