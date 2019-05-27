@@ -1,5 +1,5 @@
 import { mockRandomForEach } from 'jest-mock-random'
-import { chooseWithout } from './helpers'
+import { chooseWithout } from './utils'
 
 describe('chooseWithout', () => {
   mockRandomForEach([0.9, 0.2])
