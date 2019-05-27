@@ -15,14 +15,20 @@ const GridContainer = styled('section')<GridContainerProps>`
   grid-template-columns: repeat(${props => props.gridSize}, 1fr);
 `
 
-const Cell = styled('div')<Position & { row: number }>`
+interface CellProps extends Position {
+  row: number
+}
+const Cell = styled.div.attrs(({ row, begin, end }: CellProps) => ({
+  style: {
+    gridColumn: (begin + 1) + ' / ' + (end + 1),
+    gridRow: (row + 1) + ' / ' + (row + 2)
+  }
+}))<CellProps>`
   padding: 1rem;
   box-sizing: border-box;
   background: tomato;
   color: white;
   opacity: ${({ row }) => 1 / (row + 1)};
-  grid-column: ${({ begin, end }) => (begin + 1) + ' / ' + (end + 1)};
-  grid-row: ${({ row }) => (row + 1) + ' / ' + (row + 2)};
 `
 
 const App = () => {
