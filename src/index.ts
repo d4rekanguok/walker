@@ -16,7 +16,7 @@ type MakePosition = () => Position
 class Walker {
   public lines: number
   public constructor (opts: WalkerOptions) {
-    this.lines = opts.gridSize + 1 || 5
+    this.lines = Math.max(opts.gridSize, 3) + 1
   }
 
   public makePosition: MakePosition = () => {
