@@ -1,0 +1,34 @@
+{
+  "name": "walker",
+  "version": "1.0.0",
+  "description": "Generate random position for objects placed on a grid",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc -p ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d4rekanguok/walker.git"
+  },
+  "author": "Derek Nguyen <derek@penandpillow.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d4rekanguok/walker/issues"
+  },
+  "homepage": "https://github.com/d4rekanguok/walker#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-jest": "^22.6.4",
+    "jest": "^24.8.0",
+    "jest-mock-random": "^1.0.2",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@types/node": "^11.13.11"
+  }
+}
