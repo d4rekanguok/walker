@@ -56,8 +56,8 @@ class Walker {
     return Array(amount)
       .fill(0)
       .reduce(acc => [walkOnce(acc[0]), ...acc], [ first ])
-      .slice(1)
       .reverse()
+      .slice(1)
   }
 }
 
