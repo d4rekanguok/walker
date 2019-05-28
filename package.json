@@ -1,11 +1,13 @@
 {
-  "name": "walker",
+  "name": "@d4rek/walker",
   "version": "1.0.0",
   "description": "Generate random position for objects placed on a grid",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
-    "build": "tsc -p ./"
+    "build": "tsc -p ./",
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
