@@ -21,16 +21,22 @@ export const Form = styled.form`
 export const Button = styled.button`
   width: 100%;
   color: white;
-  background: tomato;
+  background: orangered;
   border: none;
   padding: 0.5rem 0.75rem;
   border-radius: 0.25rem;
+  opacity: 0.7;
+  transition: opacity .3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 `
 
 
 const InputGroupContainer = styled.div`
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

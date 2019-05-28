@@ -4,6 +4,7 @@ import Walker, { Position } from '../../src'
 
 import { InputGroup, Form, Button } from './components/input'
 import { GridContainer, Cell } from './components/walker'
+import { Header } from './components/header'
 import { GlobalStyle } from './components/global-style'
 
 const App = () => {
@@ -27,9 +28,10 @@ const App = () => {
     <>
       <GlobalStyle />
       <Form>
+        <Header name="Walker" href="https://github.com/d4rekanguok/walker" />
         <InputGroup
           id="gridSize"
-          label="Grid Size"
+          label="Grid size"
           type="number"
           min={3}
           value={gridSize}
@@ -37,7 +39,7 @@ const App = () => {
         />
         <InputGroup
           id="maxBlockSize"
-          label="Max Block Size"
+          label="Max block size"
           type="number"
           min={1}
           max={gridSize}
@@ -46,7 +48,7 @@ const App = () => {
         />
         <InputGroup
           id="amount"
-          label="Block Amount"
+          label="Block amount"
           type="number"
           min={5}
           value={amount}
